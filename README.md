@@ -1,48 +1,87 @@
-# Sistema de Controle de Equipamentos de TI
+# 💻 Sistema de Controle de Ativos de TI (IT Asset Management)
 
-Uma aplicação Full-Stack desenvolvida para modernizar a gestão de ativos de TI, permitindo o mapeamento de estações de trabalho, controle de estoque e auditoria de movimentações de hardwares (computadores, monitores, notebooks, etc).
+![Preview do Sistema](./preview.png)
 
-## 🚀 Funcionalidades
+## 🏢 Sobre o Projeto
+Sistema Full-Stack desenvolvido para modernizar e centralizar a gestão de patrimônio de TI dentro de uma organização corporativa. O objetivo da aplicação é substituir o controle manual feito em planilhas por um painel visual dinâmico, respondendo rapidamente: **O que temos? Onde está? Qual o histórico?**
 
-- **Dashboard de Indicadores:** Visão geral rápida com total de ativos, itens pendentes de tombamento patrimonial e panorama do estoque atual.
-- **Mapeamento de Estações (Mesas):** Visualização por andar, setor e sala. Permite identificar exatamente quais equipamentos estão instalados em cada estação de trabalho.
-- **Gestão de Estoque:** Painel completo para adicionar novos hardwares, editar informações (Modelo/Condição/Patrimônio) e categorizar por tipos.
-- **Vínculo Dinâmico:** Fluxo intuitivo para remover equipamentos de uma mesa (devolvendo-os ao estoque) ou instalar equipamentos do estoque diretamente em uma estação.
-- **Auditoria Automática (Logs):** Registro histórico automático de toda ação realizada no sistema (ex: "Equipamento X instalado na estação Y").
+## ✨ Funcionalidades Principais
+* **Acesso Baseado em Regras (Role-Based):** Visão pública de leitura para visitantes e visão restrita protegida por Autenticação JWT simulada (Login) para administradores.
+* **Gestão de Estoque:** Cadastro, edição e deleção de equipamentos (Computadores, Monitores, Notebooks) com número de patrimônio e controle de status (Novo, Usado, Defeito).
+* **Mapeamento Físico de Estações:** Vinculação e desvinculação em tempo real de equipamentos do estoque para estações de trabalho (por andar, setor e sala).
+* **Dashboard Interativo:** Visão geral em tempo real com métricas de ativos totais, itens no estoque da TI e itens pendentes de tombamento.
+* **Log de Auditoria:** Registro automatizado de todas as movimentações de patrimônio (data, hora e ação realizada) para rastreabilidade.
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Tecnologias Utilizadas
 
-A aplicação foi dividida em dois serviços independentes para garantir escalabilidade e separação de responsabilidades (SoC).
+O projeto adota o padrão de separação de responsabilidades (SoC), dividindo a aplicação em dois ecossistemas:
 
-**Frontend (Interface Gráfica):**
-* React 19 + Vite (Rápido e otimizado para build)
-* CSS3 Puro com Variáveis Globais (Identidade visual corporativa, inspirada em sistemas internos de gestão)
-* Axios (Consumo da API REST)
-* Lucide React (Ícones modernos)
+### Frontend (Interface Gráfica)
+* **React 19**
+* **Vite** (Build tool hiper-rápido)
+* **React Router DOM** (Roteamento entre páginas e proteção de rotas privadas)
+* **Axios** (Comunicação HTTP via Interceptors para injeção de tokens)
+* **Lucide React** (Ícones SVG otimizados)
+* **CSS Puro** (Com variáveis globais padronizadas com a identidade visual corporativa)
 
-**Backend (API & Dados):**
-* Python 3
-* Flask (Microframework leve e ágil para criação de endpoints RESTful)
-* SQLite3 (Banco de dados relacional embutido e de fácil manutenção)
-* Flask-CORS (Gerenciamento de permissões de origem cruzada)
+### Backend (API REST & Banco de Dados)
+* **Python 3**
+* **Flask** (Microframework para rotas RESTful)
+* **SQLite3** (Banco de dados relacional embutido)
+* **Flask-CORS** (Para permitir comunicação entre portas diferentes no localhost)
 
-## ⚙️ Como executar localmente
+---
 
-Como o sistema é Full-Stack, é necessário rodar o backend e o frontend simultaneamente. Você precisará de dois terminais abertos.
+## 🚀 Como executar este projeto localmente
 
-### 1. Iniciando o Backend (API)
-Abra um terminal, acesse a pasta do servidor e inicie o Python:
+Para rodar a aplicação na sua máquina, você precisará do **Node.js** e do **Python** instalados. Recomenda-se o uso do **VS Code**.
+
+### 1. Clone o repositório
+\`\`\`bash
+git clone https://github.com/freitasigor/controle-estoque-pge-es.git
+cd controle-estoque-pge-es
+\`\`\`
+
+### 2. Configure e inicie o Backend (API)
+Abra um terminal no VS Code e acesse a pasta do backend:
 \`\`\`bash
 cd backend
+\`\`\`
+Instale as bibliotecas necessárias (caso não tenha):
+\`\`\`bash
+pip install flask flask-cors
+\`\`\`
+Gere o banco de dados com os dados fictícios iniciais:
+\`\`\`bash
+python gerar_ficticios.py
+\`\`\`
+Inicie o servidor (ele rodará na porta `5000`):
+\`\`\`bash
 python INICIAR.py
 \`\`\`
-*O servidor rodará em `http://127.0.0.1:5000/`*
 
-### 2. Iniciando o Frontend (Aplicação React)
-Abra um segundo terminal, acesse a pasta da interface e inicie o Vite:
+### 3. Configure e inicie o Frontend
+Abra um **segundo terminal** (mantenha o primeiro rodando o servidor Python) e acesse a pasta do frontend:
 \`\`\`bash
 cd frontend
-npm install   # Instala as dependências na primeira vez
-npm run dev   # Inicia a aplicação
 \`\`\`
-*Acesse a interface no navegador através do link gerado no terminal (geralmente `http://localhost:5173/`)*
+Instale as dependências do Node:
+\`\`\`bash
+npm install
+\`\`\`
+Inicie a aplicação React:
+\`\`\`bash
+npm run dev
+\`\`\`
+*O terminal exibirá um link local (geralmente `http://localhost:5173/`). Clique com \`Ctrl\` pressionado para abrir no navegador.*
+
+---
+
+## 🔐 Acesso Administrador (Modo de Edição)
+Por padrão, a tela inicial abre em modo leitura. Para testar o painel de criação, edição e movimentação de equipamentos, clique em **"Acesso Restrito"** no menu inferior esquerdo e utilize as credenciais de teste:
+
+* **Usuário:** `admin`
+* **Senha:** `pge@123`
+
+---
+*Desenvolvido como demonstração de habilidades Full-Stack para portfólio.*
