@@ -37,43 +37,52 @@ O projeto adota o padrão de separação de responsabilidades (SoC), dividindo a
 Para rodar a aplicação na sua máquina, você precisará do **Node.js** e do **Python** instalados. Recomenda-se o uso do **VS Code**.
 
 ### 1. Clone o repositório
-\`\`\`
-git clone https://github.com/freitasigor/controle-estoque-pge-es.git
+
+```bash
+git clone [https://github.com/freitasigor/controle-estoque-pge-es.git](https://github.com/freitasigor/controle-estoque-pge-es.git)
 cd controle-estoque-pge-es
-\`\`\`
+```
 
 ### 2. Configure e inicie o Backend (API)
+
 Abra um terminal no VS Code e acesse a pasta do backend:
-\`\`\`
+```bash
 cd backend
-\`\`\`
+```
+
 Instale as bibliotecas necessárias (caso não tenha):
-\`\`\`
+```bash
 pip install flask flask-cors
-\`\`\`
+```
+
 Gere o banco de dados com os dados fictícios iniciais:
-\`\`\`
+```bash
 python gerar_ficticios.py
-\`\`\`
+```
+
 Inicie o servidor (ele rodará na porta `5000`):
-\`\`\`
+```bash
 python INICIAR.py
-\`\`\`
+```
 
 ### 3. Configure e inicie o Frontend
+
 Abra um **segundo terminal** (mantenha o primeiro rodando o servidor Python) e acesse a pasta do frontend:
-\`\`\`
+```bash
 cd frontend
-\`\`\`
+```
+
 Instale as dependências do Node:
-\`\`\`
+```bash
 npm install
-\`\`\`
+```
+
 Inicie a aplicação React:
-\`\`\`
+```bash
 npm run dev
-\`\`\`
-*O terminal exibirá um link local (geralmente `http://localhost:5173/`). Clique com \`Ctrl\` pressionado para abrir no navegador.*
+```
+
+*O terminal exibirá um link local (geralmente `http://localhost:5173/`). Clique com `Ctrl` pressionado para abrir no navegador.*
 
 ---
 
